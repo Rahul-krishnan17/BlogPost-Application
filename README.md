@@ -3,7 +3,7 @@
 This is a simple BlogPost application using Python Django.
 
 1. For running the project first you have to create a virtiual environment inside the project folder 
-command: python -m venv virtual environment name
+command: ``python -m venv virtual environment name``
 
 2. After creating the environment you have to activate the environment:
 Command: virtual environment name\scripts\activate
