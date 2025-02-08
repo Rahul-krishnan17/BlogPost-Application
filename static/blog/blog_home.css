@@ -1,0 +1,36 @@
+/* Enhanced Heading Style */
+.heading-style {
+    background: linear-gradient(45deg, #ff6b6b, #f7a6b5); /* Soft gradient background */
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    margin-bottom: 15px; /* Adds space between the heading and the post content */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect on the heading */
+.heading-style:hover {
+    background: linear-gradient(45deg, #f7a6b5, #ff6b6b); /* Reverse the gradient on hover */
+    cursor: pointer;
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Edit and Delete Button Enhancements */
+.btn {
+    border-radius: 20px;
+    margin-right: 5px;
+}

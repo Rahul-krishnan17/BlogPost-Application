@@ -1,0 +1,11 @@
+# Exclude virtual environment from pushing into GitHub.
+blog_env/
+
+# Ignore pycache folder and its contents.
+__pycache__/
+
+# Ignore all files in the migrations folder.
+**/migrations/*
+
+# Except for __init__.py, which should be included.
+!**/migrations/__init__.py

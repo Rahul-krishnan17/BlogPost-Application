@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+        <h2 class="text-center">Delete Blog Post</h2>
+        <p>Are you sure you want to delete the post <strong>{{ post.title }}</strong>?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

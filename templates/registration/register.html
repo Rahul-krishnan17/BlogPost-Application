@@ -1,0 +1,73 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+<div class="container mt-5">
+    <div class="col-md-6 offset-md-3">
+        <h2 class="text-center mb-4">Register</h2>
+        <form method="POST" onsubmit="return validateForm()" class="p-4 border rounded shadow-sm bg-light">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label" for="first_name">First Name</label>
+                <input type="text" name="first_name" class="form-control" id="first_name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="last_name">Last Name</label>
+                <input type="text" name="last_name" class="form-control" id="last_name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" name="username" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" name="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="phone_number">Phone Number</label>
+                <input type="tel" name="phone_number" class="form-control" id="phone_number" required pattern="[6-9]\d{9}" title="Enter a valid phone number (starts with 6-9 and contains 10 digits)">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2">Register</button>
+        </form>
+    </div>
+</div>
+
+    <script>
+        function validateForm() {
+            let phoneField = document.querySelector("input[name='phone_number']");
+            let phonePattern = /^[6-9]\d{9}$/; // Indian phone number validation: starts with 6-9, followed by 9 digits
+            if (!phonePattern.test(phoneField.value)) {
+                alert("Enter a valid phone number (starts with 6-9 and contains 10 digits).");
+                return false;
+            }
+    
+            return true;
+        }
+    
+        // Function for dynamic validation
+        document.addEventListener('DOMContentLoaded', () => {
+            let firstNameField = document.querySelector("input[name='first_name']");
+            let lastNameField = document.querySelector("input[name='last_name']");
+            let phoneField = document.querySelector("input[name='phone_number']");
+    
+            // Restrict characters to only letters for first and last names
+            firstNameField.addEventListener('input', function() {
+                this.value = this.value.replace(/[^a-zA-Z]/g, ''); // Replace any non-alphabetic character
+            });
+    
+            lastNameField.addEventListener('input', function() {
+                this.value = this.value.replace(/[^a-zA-Z]/g, ''); // Replace any non-alphabetic character
+            });
+    
+            // Restrict phone number input to only numbers
+            phoneField.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, ''); // Remove any non-numeric character
+            });
+        });
+    </script>
+
+{% endblock %}

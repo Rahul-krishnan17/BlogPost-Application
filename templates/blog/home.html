@@ -1,0 +1,61 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<link href="{% static 'blog/blog_home.css' %}" rel="stylesheet" type="text/css" />
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="text-center">Blog Posts</h1>
+    {% if user_first_name and user_last_name %}
+        <h5 class="mb-0">Welcome: {{ user_first_name }} {{ user_last_name }}</h5>
+    {% endif %}
+</div>
+
+<div class="row">
+    {% for post in posts %}
+        <div class="col-md-6 offset-md-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <!-- Heading with Gradient Background and Shadow -->
+                    <h5 class="card-title heading-style">{{ post.title }}</h5>
+                    
+                    <div class="card-text" id="post-content-{{ post.id }}">
+                        <!-- Initially show truncated content -->
+                        <span class="truncated-content">{{ post.content|slice:":50" }}</span> <!-- Truncated content -->
+                        <span class="full-content" style="display: none;">{{ post.content }}</span> <!-- Full content hidden initially -->
+                    </div>
+
+                    <!-- See More Button -->
+                    <button onclick="toggleContent('{{ post.id }}')" class="btn btn-sm btn-info">Read More</button>
+
+                    <p class="text-muted">By {{ post.author.username }} on {{ post.publication_date }}</p>
+
+                    <!-- Edit and Delete Buttons -->
+                    {% if user.is_authenticated and post.author == user %}
+                        <a href="{% url 'update-post' post.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'delete-post' post.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    function toggleContent(postId) {
+        var truncatedContent = document.querySelector(`#post-content-${postId} .truncated-content`);
+        var fullContent = document.querySelector(`#post-content-${postId} .full-content`);
+
+        if (truncatedContent && fullContent) {
+            if (fullContent.style.display === 'none') {
+                truncatedContent.style.display = 'none';
+                fullContent.style.display = 'inline';
+            } else {
+                truncatedContent.style.display = 'inline';
+                fullContent.style.display = 'none';
+            }
+        }
+    }
+</script>
+
+{% endblock %}
